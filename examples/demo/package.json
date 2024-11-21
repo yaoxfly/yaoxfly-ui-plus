@@ -1,0 +1,31 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --mode development",
+    "serve": "vite --mode development",
+    "preview": "vite preview",
+    "build": "vue-tsc --noEmit && vite build --mode production",
+    "build:test": "vue-tsc --noEmit && vite build --mode test",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "yaoxfly",
+  "license": "MIT",
+  "dependencies": {
+    "@vueuse/core": "^10.4.1",
+    "@yaoxfly-ui-plus/component-pc": "workspace:^",
+    "axios": "^1.5.1",
+    "element-plus": "2.3.14",
+    "pinia": "^2.1.6",
+    "qs": "^6.11.2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "unplugin-vue-components": "^0.26.0",
+    "vite-plugin-style-import": "^2.0.0"
+  }
+}

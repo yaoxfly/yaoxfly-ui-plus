@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "composite": true, //生成额外的元数据文件，这些文件可以帮助构建工具（包括TypeScript自身的--build模式）更快地确定项目是否已经被构建。
+    "lib": ["esnext", "DOM", "DOM.Iterable"], //编译过程中需要引入的库文件的列表
+    "types": ["vite/client"],
+    "paths": {
+      "@yaoxfly-ui-plus/*": ["packages/*"],
+      "@/*": ["examples/demo/src/*"]
+    }
+  },
+  "include": [
+    "packages",
+    "examples",
+    "**/vite.config.ts",
+    "typings/env.d.ts",
+    "typings/auto-import.d.ts"
+  ],
+  "exclude": ["**/node_modules", "**/dist", "examples/cdn-demo"],
+  "extensions": [".js", ".ts", ".tsx", ".jsx", ".vue", ".d.ts"]
+}
