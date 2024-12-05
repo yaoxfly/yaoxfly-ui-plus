@@ -11,9 +11,13 @@
     "build-com": "pnpm run build-type && cross-env NODE_ENV=production  ENV=production  node  ./scripts/build.mjs",
     "build-type": "tsc --project tsconfig.component-pc.json",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "clean": "rm -rf node_modules **/*/node_modules"
+    "clean": "rm -rf node_modules **/*/node_modules",
+    "prepare": "husky install",
+    "commit": "git-cz"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@ljharb/eslint-config": "^21.1.1",
     "@types/node": "^22.10.1",
     "@types/qs": "^6.9.17",
@@ -24,7 +28,10 @@
     "@vitejs/plugin-vue-jsx": "4.1.1",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.24.2",
+    "commitizen": "^4.3.1",
+    "commitlint-config-cz": "^0.13.3",
     "cross-env": "^7.0.3",
+    "cz-customizable": "^7.3.0",
     "dotenv": "^16.4.7",
     "eslint": "8.50.0",
     "eslint-config-standard": "^17.1.0",
@@ -32,6 +39,8 @@
     "eslint-plugin-n": "^17.14.0",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-vue": "^9.32.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10",
     "mockjs": "^1.1.0",
     "postcss-import": "^16.1.0",
     "rollup-plugin-external-globals": "^0.13.0",
@@ -56,5 +65,23 @@
   "engines": {
     "node": ">=16.0.0",
     "pnpm": ">=7.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,vue}": [
+      "pnpm --parallel lint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz.config.json"
+    }
   }
 }
