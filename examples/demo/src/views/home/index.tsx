@@ -9,7 +9,7 @@ export default defineComponent({
     // YxTest
     AsyncComponent: defineAsyncComponent(() => import('../test/child'))
   },
-  setup () {
+  setup() {
     // 主题切换
     const setTheme = () => {
       document.documentElement.style.setProperty('--color-primary-base', '16,185,129')
@@ -28,7 +28,7 @@ export default defineComponent({
             <span > 我是首页{config.server}</span>
           </div>
 
-          <div class={['tw-container', 'tw-m-16', 'tw-text-large', 'tw-bg-primary', 'tw-rounded', homeStyle.container] } >
+          <div class={['tw-container', 'tw-m-16', 'tw-text-large', 'tw-bg-primary', 'tw-rounded', homeStyle.container]} >
             容器1
           </div>
 
