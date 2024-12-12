@@ -10,6 +10,7 @@ import autoExport from './lib/autoExport.mjs'
 import checker from 'vite-plugin-checker'
 import buildConfig from './lib/buildConfig.mjs'
 import copyFiles from './lib/copyFiles.mjs'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 const __filenameNew = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filenameNew)
 const outDir = path.resolve(__dirname, '../packages/component-pc/dist')
@@ -18,10 +19,11 @@ const rootDir = path.resolve(__dirname, '../')
 export function resolve (...urlOrUrls) {
   return path.resolve(rootDir, ...urlOrUrls)
 }
-// autoExport({
-//   path: 'packages/component-pc/src/component',
-//   output: 'packages/component-pc/src/component/index.ts'
-// }) // 一定要放置在resolve之后
+
+autoExport({
+  path: 'packages/component-pc/src/component',
+  output: 'packages/component-pc/src/component/index.ts'
+}) // 一定要放置在resolve之后
 
 const baseConfig = defineConfig(env => {
   return {
@@ -33,11 +35,20 @@ const baseConfig = defineConfig(env => {
     },
     plugins: [
       vue(),
+      vueJsx({
+        // 使用 Vue 3 的 JSX 配置
+        jsxImportSource: 'vue' // 必须指定，告诉编译器使用 Vue 的 JSX 工厂函数
+      }),
       dts({
         include: [resolve('packages/component-pc')],
         outDir: resolve(outDir, 'types/packages/component-pc'),
         tsConfigFilePath: '../tsconfig.json',
-        rollupTypes: true
+        rollupTypes: true,
+        compilerOptions: {
+          jsx: 'preserve', // 用于支持 Vue 3 的 TSX
+          jsxFactory: 'h', // Vue 3 JSX 工厂函数
+          skipLibCheck: true
+        }
       }),
       AutoImport({
         include: [
@@ -82,9 +93,12 @@ const baseConfig = defineConfig(env => {
       })
 
     ],
+
     build: buildConfig,
     esbuild: {
-      drop: env.VITE_APP_CURRENT_MODE === 'production' ? ['console', 'debugger'] : []
+      drop: env.VITE_APP_CURRENT_MODE === 'production' ? ['console', 'debugger'] : [],
+      jsxFactory: 'h', // Vue 3 中的 JSX 工厂函数
+      jsxFragment: 'Fragment' // Vue 3 中的 Fragment 工厂函数
     }
   }
 })
@@ -98,7 +112,7 @@ async function main () {
       targetDir: resolve('packages/component-pc/dist/theme-chalk'),
       fileExtensions: ['.css'],
       tips: 'packages',
-      exclude: ['theme-chalk', 'cjs']
+      exclude: ['cjs']
     }
   )
 

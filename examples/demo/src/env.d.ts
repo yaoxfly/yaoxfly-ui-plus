@@ -1,14 +1,13 @@
 /// <reference types="vite/client" />
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  const component: DefineComponent<{}, {}, any>
-  export default component
-}
+/// <reference types="@types/web-bluetooth" />
+// declare module '*.vue' {
+//   import type { DefineComponent } from 'vue'
+//   const component: DefineComponent<object, object, any>
+//   export default component
+// }
 declare module 'qs'
 declare module 'postcss-import'
 declare module 'rollup-plugin-external-globals'
-declare module 'element-plus';
 
 interface ImportMetaEnv {
   readonly VITE_USER_NODE_ENV:string

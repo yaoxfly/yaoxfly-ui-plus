@@ -35,7 +35,8 @@
   },
   "peerDependencies": {
     "element-plus": "*",
-    "vue": "*"
+    "vue": "*",
+    "csstype": "^2.6.20"
   },
   "dependencies": {
     "@yaoxfly-ui-plus/theme-chalk": "workspace:^"
