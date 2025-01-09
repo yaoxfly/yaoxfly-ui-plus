@@ -49,6 +49,8 @@ module.exports = {
     ],
     'no-multiple-empty-lines': 0,
     'space-before-function-paren': 0,
+    'func-call-spacing': 0,
+    'no-debugger': 0,
 
     /* --typescript -- */
     '@typescript-eslint/no-explicit-any': 0,
