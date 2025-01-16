@@ -1,7 +1,7 @@
 import config from '@/config'
 import { defineAsyncComponent, Suspense, onMounted } from 'vue'
 import homeStyle from './home.module.scss'
-import type { TableColumnCtx, TableColumnRender, FormItemsProps, FormRules, FormInstance, InputInstance, AutocompleteInstance, FormProps } from '@yaoxfly-ui-plus/component-pc'
+import type { TableColumnCtx, TableColumnRender, FormItemsProps, FormRules, FormInstance, InputInstance, AutocompleteInstance, FormProps, TableInstance } from '@yaoxfly-ui-plus/component-pc'
 import { datePickerProps, datePickTypes } from 'element-plus'
 export default defineComponent({
   name: 'Home',
@@ -17,7 +17,7 @@ export default defineComponent({
     }
     setTheme()
     const input = useStorage('input-value', '可同步数据到localstorage的输入框') // vueuse的api，自动将ref同步到localstorage,实现双向绑定
-    const tableRef = ref<Record<string, any>>()
+    const tableRef = ref<TableInstance | null>(null)
     interface RowData {
       id: string | number;
       name: string;
@@ -484,7 +484,7 @@ export default defineComponent({
 
     onMounted(() => {
       restaurants.value = loadAll()
-      // console.log(tableRef.value && tableRef.value, 'elTableRef')
+      console.log(tableRef.value?.elTableRef)
     })
 
 

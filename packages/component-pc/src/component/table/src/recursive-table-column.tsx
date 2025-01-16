@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { ElTableColumn } from 'element-plus'
-import { shareProp, TableColumnCtx } from './props'
+import { shareProp, TableColumnCtx } from './types'
 
 const RecursiveTableColumn = defineComponent({
   name: 'RecursiveTableColumn',

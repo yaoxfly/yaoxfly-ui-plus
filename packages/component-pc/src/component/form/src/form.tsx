@@ -5,7 +5,7 @@ import type {
   DatePickerInstance, TimeSelectInstance, CascaderInstance,
   AutocompleteInstance, TreeInstance
 
-} from './props'
+} from './types'
 import { useExpose, useBem } from '../../../hook'
 import { namespace } from '../../../utils'
 const COMPONENT_NAME = `${namespace}Form`

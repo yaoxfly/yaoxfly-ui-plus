@@ -1,7 +1,7 @@
 import table from './table'
 import { withInstall } from '../../../utils'
 export const YxTable = withInstall(table)
-export * from './props'
+export * from './types'
 export default YxTable
 
 

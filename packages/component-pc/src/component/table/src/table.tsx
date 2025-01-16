@@ -2,7 +2,7 @@ import { defineComponent, ref, useAttrs, PropType } from 'vue'
 import type { ElTable } from 'element-plus'
 import RecursiveTableColumn from './recursive-table-column'
 import { useExpose } from '../../../hook'
-import { type TableProps, shareProp } from './props'
+import { type TableProps, shareProp } from './types'
 import { namespace } from '../../../utils'
 const COMPONENT_NAME = `${namespace}Table`
 const props = Object.assign({

@@ -1,5 +1,6 @@
 import { PropType } from 'vue'
-import type { TableColumnCtx as TableColumnCtxEx } from 'element-plus'
+import type { TableColumnCtx as TableColumnCtxEx, TableInstance as ElTableInstance } from 'element-plus'
+import type Table from './table'
 export interface TableColumnRender<T=any> {
   curRowIndex: number|string
   row: T,
@@ -29,4 +30,9 @@ export const shareProp = {
     default: () => []
   }
 }
+
+
+export type TableInstance = InstanceType<typeof Table> & {
+  elTableRef: ElTableInstance;
+};
 
