@@ -1,13 +1,13 @@
 import { PropType } from 'vue'
 import type { TableColumnCtx as TableColumnCtxEx } from 'element-plus'
-export interface Render<T=any> {
+export interface TableColumnRender<T=any> {
+  curRowIndex: number|string
   row: T,
   data: T[],
-  curRowIndex: number|string
 }
 
 export interface TableColumnCtx extends TableColumnCtxEx<any> {
-  render?: (data:Render) => any;
+  render?: (data:TableColumnRender) => any;
 };
 
 export interface TableProps {

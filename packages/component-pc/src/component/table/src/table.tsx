@@ -1,5 +1,5 @@
-import { defineComponent, onMounted, ref, useAttrs, PropType } from 'vue'
-import { ElTable } from 'element-plus'
+import { defineComponent, ref, useAttrs, PropType } from 'vue'
+import type { ElTable } from 'element-plus'
 import RecursiveTableColumn from './recursive-table-column'
 import { useExpose } from '../../../hook'
 import { type TableProps, shareProp } from './props'
@@ -22,6 +22,7 @@ const props = Object.assign({
 
 export default defineComponent({
   name: COMPONENT_NAME,
+  inheritAttrs: false,
   props,
   setup(props) {
     const elTableRef = ref<InstanceType<typeof ElTable>>()
