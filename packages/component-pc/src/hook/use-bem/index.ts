@@ -17,7 +17,7 @@ export const useBem = ({ name }:UseBemParam) => {
    * @param block 块名。
    * @returns 返回一个函数，该函数接受元素和修饰符作为参数，并生成完整的 BEM 类名。
    */
-  const createBEM = (block: string): BEMFunction => {
+  const createBEM = (block: string = name): BEMFunction => {
     block = toKebabCase(block)
     /**
       * 生成BEM命名的函数。

@@ -1,3 +1,5 @@
-.yx-table {
+@use './mixins/bem.scss' as *;
+
+@include block('table') {
   width: 100%;
 }
