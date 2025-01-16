@@ -3,7 +3,8 @@ import type { ElTable } from 'element-plus'
 import RecursiveTableColumn from './recursive-table-column'
 import { useExpose } from '../../../hook'
 import { type TableProps, shareProp } from './props'
-const COMPONENT_NAME = 'YxTable'
+import { namespace } from '../../../utils'
+const COMPONENT_NAME = `${namespace}Table`
 const props = Object.assign({
   stripe: {
     type: Boolean as PropType<TableProps['stripe']>,

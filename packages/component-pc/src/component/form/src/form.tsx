@@ -7,8 +7,8 @@ import type {
 
 } from './props'
 import { useExpose, useBem } from '../../../hook'
-import { prefix } from '../../../utils'
-const COMPONENT_NAME = `${prefix}Form`
+import { namespace } from '../../../utils'
+const COMPONENT_NAME = `${namespace}Form`
 export default defineComponent({
   name: COMPONENT_NAME,
   inheritAttrs: false,
