@@ -1,0 +1,9 @@
+@use './mixins/bem.scss' as *;
+
+@include block('form') {
+
+  .el-date-editor.el-input,
+  .el-cascader {
+    width: 100%;
+  }
+}

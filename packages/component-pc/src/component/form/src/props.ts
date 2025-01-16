@@ -3,6 +3,7 @@ import type {
   FormProps as ElFormProps,
   FormItemRule as ElFormItemRule,
   FormRules as ElFormRules,
+  FormInstance as ElFormInstances,
   // input
   InputProps as ElInputProps,
   InputInstance as ElInputInstance,
@@ -42,6 +43,7 @@ import type {
   // Tree
   TreeInstance as ElTreeInstance
 } from 'element-plus'
+import { JSX } from 'vue/jsx-runtime'
 import type Form from './form'
 export type CamelCase<S extends string> =
   S extends `${infer T}-${infer U}${infer Rest}`
@@ -183,6 +185,7 @@ export interface FormItemPropsEl extends Partial<ElFormItemProps> {
   input?: Partial<InputProps>,
   select?: Partial<SelectProps>,
   inputNumber?: Partial<InputNumberProps>
+  render?:(params: { data: FormItemPropsEl, index: number }) => JSX.Element
   radio?: Partial<radioProps>
   checkbox?: Partial<CheckboxProps>
   datePicker?: Partial<DatePickerProps>
@@ -216,8 +219,10 @@ export type TimeSelectInstance = ElTimeSelectInstance
 export type CascaderInstance = ElCascaderInstance
 export type AutocompleteInstance = ElAutocompleteInstance
 export type TreeInstance = ElTreeInstance
-
-export type FormInstance<K extends string, T extends Record<K, any>> = InstanceType<typeof Form> & {
+export type ElFormInstance = ElFormInstances
+export type FormInstance<
+  K extends string = string,
+  T extends Record<K, any> = Record<string, any>
+> = InstanceType<typeof Form> & {
   refs: T;
 };
-
