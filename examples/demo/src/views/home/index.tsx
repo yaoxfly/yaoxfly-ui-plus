@@ -1,8 +1,8 @@
 import config from '@/config'
 import { defineAsyncComponent, Suspense, onMounted } from 'vue'
 import homeStyle from './home.module.scss'
-import type { TableColumnCtx, Render, FormItemsProps, FormRules, FormInstance } from '@yaoxfly-ui-plus/component-pc'
-import type { InputInstance, AutocompleteInstance } from 'element-plus'
+import type { TableColumnCtx, TableColumnRender, FormItemsProps, FormRules, FormInstance, InputInstance, AutocompleteInstance, FormProps } from '@yaoxfly-ui-plus/component-pc'
+import { datePickerProps, datePickTypes } from 'element-plus'
 export default defineComponent({
   name: 'Home',
   components: {
@@ -37,9 +37,9 @@ export default defineComponent({
         {
           prop: 'name',
           label: '姓名',
-          render: (data: Render<RowData>) => {
-            console.log(data.data, 'data')
-            return <span>{data.row.name}</span>
+          render: (params: TableColumnRender<RowData>) => {
+            console.log(params, 'data')
+            return <span>{params.row.name}1</span>
           }
 
         },
@@ -106,7 +106,14 @@ export default defineComponent({
     }
 
 
-    const form = ref<{ formItems: FormItemsProps, model: Model, rules: FormRules<Model> }>({
+
+    type CombinedProps = Omit<FormProps, 'rules' | 'formItems' | 'model'> & {
+      rules: FormRules<Model>;
+      formItems: FormItemsProps;
+      model: Model;
+    };
+
+    const form = ref<CombinedProps>({
       model: {
         activity1: '111',
         activity2: 0,
@@ -119,9 +126,12 @@ export default defineComponent({
         cascader: '',
         autocomplete: '',
         treeSelect: ''
+
       },
       rules: {
         activity1: { required: true, message: '请输入活动名称', trigger: 'blur' }
+
+
       },
       formItems: [
         [
@@ -134,7 +144,7 @@ export default defineComponent({
             input: {
               placeholder: '请输入活动名称',
               vModel: 'activity1',
-              clearable: true,
+              clearable: false,
               modifier: ['trim'],
               onBlur: (event) => {
                 console.log((event.target as HTMLInputElement).value, 'activity1')
@@ -147,14 +157,20 @@ export default defineComponent({
             label: 'Activity name2',
             span: 8,
             prop: 'activity2',
-            // rules: [{ required: true, message: '请输入活动2名称', trigger: 'blur' }],
+            rules: [{ required: true, message: '请输入活动2名称', trigger: 'blur' }],
             type: 'inputNumber',
-            inputNumber: {
-              vModel: 'activity2',
-              onInput: (value) => {
+            render: (params) => {
+              return <el-input-Number v-model={form.value.model.activity2} onInput={(value: any) => {
                 console.log(value, 'activity2')
-              }
+                console.log(params)
+              }}></el-input-Number>
             }
+            // inputNumber: {
+            //   vModel: 'activity2',
+            //   onInput: (value) => {
+            //     console.log(value, 'activity2')
+            //   }
+            // }
           },
           {
             label: 'Activity name3',
@@ -165,7 +181,7 @@ export default defineComponent({
             {
               placeholder: '请输入活动名称',
               vModel: 'activity3',
-              clearable: true,
+              // clearable: true,
               options: [{ label: '活动2', value: '2', disabled: true }, { label: '活动3', value: '3' }]
 
             }
@@ -215,7 +231,8 @@ export default defineComponent({
             {
               placeholder: '请输入活动名称',
               vModel: 'datePicker',
-              clearable: true,
+              // disabledDate: () => false,
+              // clearable: true,
               onChange: (value) => {
                 console.log(value)
               }
@@ -260,7 +277,7 @@ export default defineComponent({
             cascader:
             {
               vModel: 'cascader',
-              clearable: true,
+              // clearable: true,
               showAllLevels: false,
               props: { multiple: true },
               filterable: true,
@@ -363,7 +380,7 @@ export default defineComponent({
             treeSelect: {
               placeholder: '请输入活动名称',
               vModel: 'treeSelect',
-              clearable: true,
+              // clearable: true,
               showCheckbox: true,
               checkStrictly: true,
               renderAfterExpand: false,
@@ -450,7 +467,8 @@ export default defineComponent({
             }
           }
         ]
-      ]
+      ],
+      labelWidth: '150'
     })
 
     const formRef = ref<FormInstance<'activity1Ref' | 'autocomplete', {
@@ -473,8 +491,14 @@ export default defineComponent({
     return () => <>
       {/* <yx-button></yx-button>
         <yx-test ></yx-test> */}
-      {/* <yx-table {...table.value} ref={tableRef} ></yx-table> */}
-      <yx-form {...form.value} ref={formRef}></yx-form>
+      <yx-table {...table.value} ref={tableRef} ></yx-table>
+      <yx-form {...form.value} ref={formRef} clearable disable-after-today >
+
+        {{
+          datePicker: (item: any) => item.type
+        }}
+
+      </yx-form>
       <div>{table.value}</div>
       <div class='tw-flex tw-justify-center  tw-items-center  tw-bg-gray-50  tw-text-black'>
         <span >我是首页{config.server}</span>
